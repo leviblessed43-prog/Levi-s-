@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Levi Tech Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== INLINE CSS WITH ANIMATIONS ===== -->
+  <style>
+    /* ===== BODY & GENERAL STYLING ===== */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #f4f6f8, #e0e8f0);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0a66c2, #084d8a);
+      color: white;
+      padding: 40px 15px;
+      text-align: center;
+      animation: slideDown 1s ease-out;
+    }
+
+    section {
+      background: white;
+      margin: 20px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1s forwards;
+    }
+
+    section:nth-child(2) { animation-delay: 0.3s; }
+    section:nth-child(3) { animation-delay: 0.6s; }
+    section:nth-child(4) { animation-delay: 0.9s; }
+
+    h2 {
+      color: #0a66c2;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #0a66c2;
+      margin-top: 5px;
+      border-radius: 2px;
+    }
+
+    h3 {
+      color: #084d8a;
+      margin-top: 15px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    /* ===== BUTTON STYLING & HOVER ===== */
+    .btn {
+      display: inline-block;
+      margin: 20px auto;
+      background: #0a66c2;
+      color: red;
+      padding: 14px 22px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      background: #084d8a;
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes slideDown {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== SERVICE CARD HOVER ===== */
+    section:hover {
+      transform: translateY(-5px);
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+  </style>
+
+  <!-- ===== INLINE PWA MANIFEST ===== -->
+  <link rel="manifest" href="data:application/json,{
+    &quot;name&quot;:&quot;Levi Tech Services&quot;,
+    &quot;short_name&quot;:&quot;LeviTech&quot;,
+    &quot;start_url&quot;:&quot;./index.html&quot;,
+    &quot;display&quot;:&quot;standalone&quot;,
+    &quot;background_color&quot;:&quot;#0a66c2&quot;,
+    &quot;theme_color&quot;:&quot;#0a66c2&quot;,
+    &quot;icons&quot;:[
+      {&quot;src&quot;:&quot;icon-192.png&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/png&quot;},
+      {&quot;src&quot;:&quot;icon-512.png&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/png&quot;}
+    ]
+  }">
+  <meta name="theme-color" content="#0a66c2">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>Levi Tech Services</h1>
+    <p>Simple websites • Tech help • Student services</p>
+  </header>
+
+  <!-- ===== WHAT I DO ===== -->
+  <section>
+    <h2>What I Do</h2>
+    <p>I help students and small businesses with simple websites, phone tech help, and document formatting — all at affordable prices.</p>
+    <ul>
+      <li>✔ Affordable prices</li>
+      <li>✔ Fast delivery</li>
+      <li>✔ Built with modern web tech</li>
+    </ul>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section>
+    <h2>My Services</h2>
+
+    <h3>🌐 Website Creation</h3>
+    <p>I create clean and simple websites for students and small businesses.</p>
+    <p><b>Price:</b> Affordable</p>
+
+    <h3>📱 Phone Tech Help</h3>
+    <p>Phone slow? Data draining? I help optimize your phone.</p>
+
+    <h3>📄 Document & Assignment Formatting</h3>
+    <p>Clean Word files, PDFs, and school documents.</p>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section>
+    <h2>Contact Me</h2>
+    <p>Click below to chat with me directly on WhatsApp and hire my services:</p>
+    <a class="btn" href="https://wa.me/256785010175" target="_blank">Chat on WhatsApp</a>
+  </section>
+
+  <!-- ===== INLINE SERVICE WORKER ===== -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        self.addEventListener('install', e => { console.log('Service Worker: Installed'); });
+        self.addEventListener('activate', e => { console.log('Service Worker: Activated'); });
+        self.addEventListener('fetch', e => {});
+      `;
+      const blob = new Blob([swCode], { type: 'application/javascript' });
+      const swUrl = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl)
+      .then(() => console.log('Service Worker Registered'))
+      .catch(err => console.log('Service Worker Failed:', err));
+    }
+  </script>
+
+</body>
+</html>
